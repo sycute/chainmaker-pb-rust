@@ -1,0 +1,435 @@
+/*
+ Copyright (C) BABEC. All rights reserved.
+ Copyright (C) THL A29 Limited, a Tencent company. All rights reserved.
+
+ SPDX-License-Identifier: Apache-2.0
+ */
+
+syntax = "proto3";
+
+option java_package = "org.chainmaker.pb.syscontract";
+option go_package   = "chainmaker.org/chainmaker/pb-go/v2/syscontract";
+
+package syscontract;
+
+
+enum RelayCrossFunction {
+    // save gateway
+    SAVE_GATEWAY = 0;
+    // update gateway
+    UPDATE_GATEWAY = 1;
+    // save cross chain info
+    SAVE_CROSS_CHAIN_INFO = 2;
+    // get error cross chain transaction list
+    GET_ERROR_CROSS_CHAIN_TX_LIST = 3;
+    // delete error cross chain transaction list
+    DELETE_ERROR_CROSS_CHAIN_TX_LIST = 4;
+    // update cross chain try
+    UPDATE_CROSS_CHAIN_TRY = 5;
+    // update cross chain result
+    UPDATE_CROSS_CHAIN_RESULT = 6;
+    // update cross chain confirm
+    UPDATE_CROSS_CHAIN_CONFIRM = 7;
+    // update source gateway confirm
+    UPDATE_SRC_GATEWAY_CONFIRM = 8;
+    // get gateway number
+    GET_GATEWAY_NUM = 9;
+    // get gateway
+    GET_GATEWAY = 10;
+    // get gateway by range
+    GET_GATEWAY_BY_RANGE = 11;
+    // get cross chain number
+    GET_CROSS_CHAIN_NUM = 12;
+    // get cross chain information
+    GET_CROSS_CHAIN_INFO = 13;
+    // get cross chain information by range
+    GET_CROSS_CHAIN_INFO_BY_RANGE = 14;
+    // get not end cross chian id list
+    GET_NOT_END_CROSS_CHIAN_ID_LIST = 15;
+    // set admin
+    SET_CROSS_ADMIN = 16;
+    // delete admin
+    DELETE_CROSS_ADEMIN = 17;
+    // check if sender is admin
+    IS_CROSS_ADMIN = 18;
+}
+
+message SaveGateway {
+    enum Parameter {
+        // gateway information byte
+        GATEWAY_INFO_BYTE = 0;
+    }
+}
+
+message UpdateGateway {
+    enum Parameter {
+        // gateway id
+        GATEWAY_ID = 0;
+        // gateway information byte
+        GATEWAY_INFO_BYTE = 1;
+    }
+}
+
+message GetGateway {
+    enum Parameter {
+        // gateway id
+        GATEWAY_ID = 0;
+    }
+}
+
+message GetGatewayByRange {
+    enum Parameter {
+        // start gateway id
+        START_GATEWAY_ID = 0;
+        // stop gateway id
+        STOP_GATEWAY_ID = 1;
+    }
+}
+
+message SaveCrossChainInfo {
+    enum Parameter {
+        // cross_chain_info_byte
+        CROSS_CHAIN_INFO_BYTE = 0;
+    }
+}
+
+message UpdateCrossChainTry {
+    enum Parameter {
+        // cross chain id
+        CROSS_CHAIN_ID = 0;
+        // cross chain transaction byte
+        CROSS_CHAIN_TX_BYTE = 1;
+    }
+}
+
+message UpdateCrossChainResult {
+    enum Parameter {
+        // cross chain id
+        CROSS_CHAIN_ID = 0;
+        // cross chain result
+        CROSS_CHAIN_RESULT = 1;
+    }
+}
+
+message DeleteErrorCrossChainTxList {
+    enum Parameter {
+        // cross chain id
+        CROSS_CHAIN_ID = 0;
+    }
+}
+
+message UpdateCrossChainConfirm {
+    enum Parameter {
+        // cross chain id
+        CROSS_CHAIN_ID = 0;
+        // cross chain confirm byte
+        CROSS_CHAIN_CONFIRM_BYTE = 1;
+    }
+}
+
+message UpdateSrcGatewayConfirm {
+    enum Parameter {
+        // cross chain id
+        CROSS_CHAIN_ID = 0;
+        // confirm result
+        CONFIRM_RESULT = 1;
+    }
+}
+
+message GetCrossChainInfo {
+    enum Parameter {
+        // cross chain id
+        CROSS_CHAIN_ID = 0;
+    }
+}
+
+message GetCrossChainInfoByRange {
+    enum Parameter {
+        // start cross chain id
+        START_CROSS_CHAIN_ID = 0;
+        // stop cross chain id
+        STOP_CROSS_CHAIN_ID = 1;
+    }
+}
+
+message SetCrossAdmin {
+    enum Parameter {
+        // admin address
+        CROSS_ADMIN_ADDRESS = 0;
+    }
+}
+
+message DeleteCrossAdmin {
+    enum Parameter {
+        // admin address
+        CROSS_ADMIN_ADDRESS = 0;
+    }
+}
+
+message EventDataType {
+    enum Parameter {
+        // string
+        STRING = 0;
+        // map
+        MAP = 1;
+        // byte
+        BYTE = 2;
+        // BOOL
+        BOOL = 3;
+        // int
+        INT = 4;
+        // float
+        FLOAT = 5;
+        // array
+        ARRAY = 6;
+        // hash, bcos
+        HASH = 7;
+        // ADDRESS, bcos
+        ADDRESS = 8;
+    }
+}
+
+message Code {
+    enum Parameter {
+        // sucess
+        GATEWAY_SUCCESS = 0;
+        // timeout
+        GATEWAY_TIMEOUT = 1;
+        // parameter invalid
+        INVALID_PARAMETER = 2;
+        // tx prove error
+        TX_PROVE_ERROR = 3;
+        // contract fail
+        CONTRACT_FAIL = 4;
+        // internal error
+        INTERNAL_ERROR = 5;
+        // relay chain error
+        RELAY_CHAIN_ERROR = 6;
+    }
+}
+
+message CrossType {
+    enum Parameter {
+        // cross chain query
+        QUERY = 0;
+        // cross chain invoke
+        INVOKE = 1;
+    }
+}
+
+message TxResultValue {
+    enum Parameter {
+        // success
+        TX_SUCCESS = 0;
+        // timeout
+        TX_TIMEOUT = 1;
+        // fail
+        TX_FAIL = 2;
+        // tx not exist
+        TX_NOT_EXIST = 3;
+        // no permissions
+        TX_NO_PERMISSIONS = 4;
+        // no gateway
+        GATEWAY_NOT_FOUND = 5;
+        // gateway ping error
+        GATEWAY_PINGPONG_ERROR = 6;
+        // chain ping error
+        CHAIN_PING_ERROR = 7;
+        // src gateway get error
+        SRC_GATEWAY_GET_ERROR = 8;
+    }
+}
+
+message TxVerifyRsult {
+    enum Parameter {
+        // success
+        VERIFY_SUCCESS = 0;
+        // failed
+        VERIFY_INVALID = 1;
+        // not need
+        VERIFY_NOT_NEED = 2;
+    }
+}
+
+message CrossChainStateValue {
+    enum Parameter {
+        // new
+        NEW = 0;
+        // wait execute
+        WAIT_EXECUTE = 1;
+        // wait confirm
+        WAIT_CONFIRM = 2;
+        // confirm end
+        CONFIRM_END = 3;
+        // cancel end
+        CANCEL_END=4;
+    }
+}
+
+message EventName {
+    enum Parameter {
+        // new
+        NEW_CROSS_CHAIN = 0;
+        // try end
+        CROSS_CHAIN_TRY_END = 1;
+        // update result end
+        UPADATE_RESULT_END = 2;
+        // confirm end
+        GATEWAY_CONFIRM_END = 3;
+        // src gateway confirm end
+        SRC_GATEWAY_CONFIRM_END = 4;
+        // set admin
+        SET_CROSS_ADMIN = 5;
+        // delete admin
+        DELETE_CROSS_ADMIN = 6;
+        // new gateway
+        NEW_CROSS_GATEWAY = 7;
+        // gateway update
+        CROSS_GATEWAY_UPDATE = 8;
+    }
+}
+
+message CrossChainInfo {
+    // cross chain id
+    string cross_chain_id = 1;
+    // cross chain name
+    string cross_chain_name = 2;
+    // cross chain flag
+    string cross_chain_flag = 3;
+    // src gateway id
+    string from = 4;
+    // cross chain message
+    repeated CrossChainMsg cross_chain_msg = 5;
+    // first tx
+    TxContentWithVerify first_tx_content = 6;
+    // tx content adn verify result
+    repeated TxContentWithVerify cross_chain_tx_content = 7;
+    // cross chain result
+    bool cross_chain_result = 8;
+    // cross chain confirm result
+    repeated CrossChainConfirm gateway_confirm_result = 9;
+    // cross chain state
+    CrossChainStateValue.Parameter state = 10;
+    // confirm information
+    ConfirmInfo confirm_info = 11;
+    // cancel information
+    CancelInfo cancel_info = 12;
+    // confirm result
+    CrossChainConfirm confirm_result = 13;
+    // timeout
+    int64 timeout = 14;
+    // cross type
+    CrossType.Parameter cross_type = 19;
+}
+
+message CrossChainMsg {
+    // target gateway id
+    string gateway_id = 1;
+    // target chain resource id
+    string chain_rid = 2;
+    // target contract name
+    string contract_name = 3;
+    // target method
+    string method = 4;
+    // sign identity
+    repeated string identity = 5;
+    // target contract parameter
+    string parameter = 6;
+    // contract parameter data
+    repeated int32 param_data = 7;
+    // bcos, parameter data type
+    repeated EventDataType.Parameter param_data_type = 8;
+    // extra data
+    string extra_data = 9;
+    // confirm information
+    ConfirmInfo confirm_info = 10;
+    // cancel information
+    CancelInfo cancel_info = 11;
+    // bcos abi
+    string abi = 12;
+}
+
+message TxContentWithVerify {
+    // tx content
+    TxContent tx_content = 1;
+    // try result
+    repeated string try_result = 2;
+    // tx verify result
+    TxVerifyRsult.Parameter tx_verify_result = 3;
+}
+
+message ConfirmInfo {
+    // chain resource id
+    string chain_rid = 2;
+    // contract name
+    string contract_name = 3;
+    // method
+    string method = 4;
+    // parameter
+    string parameter = 5;
+    // parameter data
+    repeated int32 param_data = 6;
+    // bcos, parameter data type
+    repeated EventDataType.Parameter param_data_type = 7;
+    // extra data
+    string extra_data = 8;
+    // bcos abi
+    string abi = 9;
+}
+
+message CrossChainConfirm {
+    // result code
+    Code.Parameter code = 1;
+    // message
+    string message = 2;
+}
+
+message TxContent {
+    // tx id
+    string tx_id = 1;
+    // tx content
+    bytes tx = 2;
+    // tx result
+    TxResultValue.Parameter tx_result = 3;
+    // gateway id
+    string gateway_id = 4;
+    // chain resource id
+    string chain_rid = 5;
+    // tx prove json string
+    string tx_prove = 6;
+    // block height
+    int64 block_height = 7;
+}
+
+message CancelInfo {
+    // chain resource id
+    string chain_rid = 2;
+    // contract name
+    string contract_name = 3;
+    // method
+    string method = 4;
+    // parameter
+    string parameter = 5;
+    // param_data
+    repeated int32 param_data = 6;
+    // bcos param data type
+    repeated EventDataType.Parameter param_data_type = 7;
+    // extra data
+    string extra_data = 8;
+    // bcos abi
+    string abi = 9;
+}
+
+message CrossChainTxUpChain {
+    // confirm index
+    int32 index = 1;
+    // tx content and verify result
+    TxContentWithVerify tx_content_with_verify = 2;
+}
+
+message CrossChainConfirmUpChain {
+    // confirm index
+    int32 index = 1;
+    // confirm result
+    CrossChainConfirm cross_chain_confirm = 2;
+}
